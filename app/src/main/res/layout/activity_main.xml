@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity"
+    android:orientation="vertical"
+    android:gravity="center">
+    <Button
+        android:id="@+id/btn_sing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="图片压缩"
+        />
+    <Button
+        android:id="@+id/btn_multiple"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="多选图片压缩"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible"
+        />
+    <Button
+        android:id="@+id/btn_sharpening"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="图片卷积"
+        android:layout_marginTop="10dp"
+        />
+
+</LinearLayout>
