@@ -40,6 +40,7 @@
         <activity android:name=".activity.SingChoiceImageActivity" />
         <activity android:name=".activity.MultipleChoiceImageActivity"/>
         <activity android:name=".activity.SharpeningActivity"/>
+        <activity android:name=".activity.ChangeColorActivity"/>
     </application>
 
 </manifest>

@@ -75,11 +75,17 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-
         findViewById(R.id.btn_multiple).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this,MultipleChoiceImageActivity.class));
+            }
+        });
+
+        findViewById(R.id.btn_coloring).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,ChangeColorActivity.class));
             }
         });
     }
