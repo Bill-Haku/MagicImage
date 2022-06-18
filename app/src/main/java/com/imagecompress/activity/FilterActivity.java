@@ -34,7 +34,7 @@ import java.util.Random;
 public class FilterActivity extends AppCompatActivity {
     private ImageView mChangeColorIv;
     private Button mChooseButton, mSaveButton;
-    private Button mOldTimeFilter;
+    private Button mOldTimeFilter, mBlackWhiteFilter, mAnimeFilter;
 
     private Bitmap mBitmap = null;
 
@@ -99,6 +99,32 @@ public class FilterActivity extends AppCompatActivity {
                 }
             }
         });
+
+        mBlackWhiteFilter = (Button) findViewById(R.id.black_white_btn);
+        mBlackWhiteFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mBitmap != null) {
+                    blackWhiteFilter();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "请先选择图片", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        mAnimeFilter = (Button) findViewById(R.id.anime_btn);
+        mAnimeFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mBitmap != null) {
+                    AnimeFilter();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "请先选择图片", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
@@ -128,6 +154,44 @@ public class FilterActivity extends AppCompatActivity {
                 0.393f, 0.769f, 0.189f, 0, 0,
                 0.349f, 0.686f, 0.168f, 0, 0,
                 0.272f, 0.534f, 0.131f, 0, 0,
+                0, 0, 0, 1, 0
+        });
+        paint.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
+        canvas.drawBitmap(mBitmap, 0, 0, paint);
+        mChangeColorIv.setImageBitmap(bmp);
+    }
+
+    public void blackWhiteFilter() {
+        //直接操作矩阵 来改变图片的风格(加滤镜);
+        Bitmap bmp = Bitmap.createBitmap(mBitmap.getWidth(), mBitmap.getHeight(),
+                Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bmp);
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        //操作矩阵
+        ColorMatrix colorMatrix = new ColorMatrix(new float[]{
+                0.33f, 0.59f, 0.11f, 0, 0,
+                0.33f, 0.59f, 0.11f, 0, 0,
+                0.33f, 0.59f, 0.11f, 0, 0,
+                0, 0, 0, 1, 0
+        });
+        paint.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
+        canvas.drawBitmap(mBitmap, 0, 0, paint);
+        mChangeColorIv.setImageBitmap(bmp);
+    }
+
+    public void AnimeFilter() {
+        //直接操作矩阵 来改变图片的风格(加滤镜);
+        Bitmap bmp = Bitmap.createBitmap(mBitmap.getWidth(), mBitmap.getHeight(),
+                Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bmp);
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        //操作矩阵
+        ColorMatrix colorMatrix = new ColorMatrix(new float[]{
+                1.438f, -0.122f, -0.016f, 0, -0.03f,
+                -0.062f, 1.378f, -0.016f, 0, 0.05f,
+                -0.062f, -0.122f, 1.483f, 0, -0.02f,
                 0, 0, 0, 1, 0
         });
         paint.setColorFilter(new ColorMatrixColorFilter(colorMatrix));

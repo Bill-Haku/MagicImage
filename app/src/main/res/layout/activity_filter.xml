@@ -26,6 +26,18 @@
         android:text="怀旧滤镜" />
 
     <Button
+        android:id="@+id/black_white_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="黑白滤镜" />
+
+    <Button
+        android:id="@+id/anime_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="春日动漫滤镜" />
+
+    <Button
         android:id="@+id/save_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
