@@ -43,6 +43,7 @@
         <activity android:name=".activity.MultipleChoiceImageActivity"/>
         <activity android:name=".activity.SharpeningActivity"/>
         <activity android:name=".activity.ChangeColorActivity"/>
+        <activity android:name=".activity.FilterActivity"/>
     </application>
 
 </manifest>

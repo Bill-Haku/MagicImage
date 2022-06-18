@@ -88,6 +88,13 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(MainActivity.this,ChangeColorActivity.class));
             }
         });
+
+        findViewById(R.id.btn_filter).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,FilterActivity.class));
+            }
+        });
     }
     @Override
     public void onBackPressed() {

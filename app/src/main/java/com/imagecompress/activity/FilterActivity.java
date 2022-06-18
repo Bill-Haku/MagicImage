@@ -4,6 +4,10 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -24,29 +28,22 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URI;
 import java.util.Random;
 //https://blog.csdn.net/cfy137000/article/details/54646912
 
-public class ChangeColorActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener {
+public class FilterActivity extends AppCompatActivity {
     private ImageView mChangeColorIv;
-    private SeekBar mHueSeekBar, mSaturationSeekBar, mLumSeekBar;
     private Button mChooseButton, mSaveButton;
+    private Button mOldTimeFilter;
 
     private Bitmap mBitmap = null;
-
-    private float mHue = 0, mSaturation = 1f, mLum = 1f;
-    private static final int MID_VALUE = 128;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_change_color);
+        setContentView(R.layout.activity_filter);
 
         mChangeColorIv = (ImageView) findViewById(R.id.change_color_iv);
-        mHueSeekBar = (SeekBar) findViewById(R.id.hue_seek_bar);
-        mSaturationSeekBar = (SeekBar) findViewById(R.id.saturation_seek_bar);
-        mLumSeekBar = (SeekBar) findViewById(R.id.lum_seek_bar);
         mChooseButton = (Button) findViewById(R.id.choose_btn);
         mChooseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,15 +87,18 @@ public class ChangeColorActivity extends AppCompatActivity implements SeekBar.On
             }
         });
 
-        //获得图片资源
-//        mBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ayaki);
-//        mChangeColorIv.setImageBitmap(mBitmap);
-
-        //对seekBar设置监听
-        mHueSeekBar.setOnSeekBarChangeListener(this);
-        mSaturationSeekBar.setOnSeekBarChangeListener(this);
-        mLumSeekBar.setOnSeekBarChangeListener(this);
-
+        mOldTimeFilter = (Button) findViewById(R.id.old_time_btn);
+        mOldTimeFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mBitmap != null) {
+                    oldTimeFilter();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "请先选择图片", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
@@ -116,38 +116,23 @@ public class ChangeColorActivity extends AppCompatActivity implements SeekBar.On
         }
     }
 
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        switch (seekBar.getId()) {
-            case R.id.hue_seek_bar:
-                //色相的范围是正负180
-                mHue = (progress - MID_VALUE) * 1f / MID_VALUE * 180;
-                break;
-            case R.id.saturation_seek_bar:
-                //范围是0-2;
-                mSaturation = progress * 1f / MID_VALUE;
-                break;
-            case R.id.lum_seek_bar:
-                mLum = progress * 1f / MID_VALUE;
-                break;
-        }
-
-        if (mBitmap != null) {
-            Bitmap bitmap = ImageHelper.getChangedBitmap(mBitmap, mHue, mSaturation, mLum);
-            mChangeColorIv.setImageBitmap(bitmap);
-        }
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-        if (mBitmap == null) {
-            Toast.makeText(getApplicationContext(), "请先选择图片", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-
+    public void oldTimeFilter() {
+        //直接操作矩阵 来改变图片的风格(加滤镜);
+        Bitmap bmp = Bitmap.createBitmap(mBitmap.getWidth(), mBitmap.getHeight(),
+                Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bmp);
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        //操作矩阵
+        ColorMatrix colorMatrix = new ColorMatrix(new float[]{
+                0.393f, 0.769f, 0.189f, 0, 0,
+                0.349f, 0.686f, 0.168f, 0, 0,
+                0.272f, 0.534f, 0.131f, 0, 0,
+                0, 0, 0, 1, 0
+        });
+        paint.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
+        canvas.drawBitmap(mBitmap, 0, 0, paint);
+        mChangeColorIv.setImageBitmap(bmp);
     }
 }
 
