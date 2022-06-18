@@ -28,6 +28,8 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 //https://blog.csdn.net/cfy137000/article/details/54646912
 
@@ -66,9 +68,9 @@ public class FilterActivity extends AppCompatActivity {
                     if (!temp.exists()) {
                         temp.mkdirs();
                     }
-                    Random random = new Random();
-                    int randNum = random.nextInt(99999999);
-                    String randStr = String.valueOf(randNum);
+                    Date date = new Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_hhmmss");
+                    String randStr = sdf.format(date);
                     String fileName = path + "img_" + randStr + ".jpg";
                     File file = new File(fileName);
                     try {
@@ -80,6 +82,7 @@ public class FilterActivity extends AppCompatActivity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    mChangeColorIv.setDrawingCacheEnabled(false);
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "请先选择图片", Toast.LENGTH_SHORT).show();
