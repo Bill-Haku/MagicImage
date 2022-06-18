@@ -1,4 +1,4 @@
-package com.imagecompress;
+package com.imagecompress.androidtest;
 
 import org.junit.Test;
 
