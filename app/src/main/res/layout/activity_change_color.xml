@@ -58,4 +58,10 @@
         android:max="256"
         android:progress="128"/>
 
+    <Button
+        android:id="@+id/save_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="保存图片" />
+
 </LinearLayout>
