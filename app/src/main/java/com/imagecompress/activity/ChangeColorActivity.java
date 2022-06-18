@@ -84,6 +84,9 @@ public class ChangeColorActivity extends AppCompatActivity implements SeekBar.On
                         e.printStackTrace();
                     }
                 }
+                else {
+                    Toast.makeText(getApplicationContext(), "请先选择图片", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -137,7 +140,9 @@ public class ChangeColorActivity extends AppCompatActivity implements SeekBar.On
 
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
-
+        if (mBitmap == null) {
+            Toast.makeText(getApplicationContext(), "请先选择图片", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
