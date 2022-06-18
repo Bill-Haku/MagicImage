@@ -184,7 +184,7 @@ public class SharpeningActivity extends BaseActivity {
                             if (!SharpeningActivity.this.isFinishing()) {
                                 Glide.with(SharpeningActivity.this).load(file).into(mSharpeningImageView);
                             }
-                            mSharpeningText.setText("Size:" + FileUtils.imageSize(file.length()));
+//                            mSharpeningText.setText("Size:" + FileUtils.imageSize(file.length()));
                             if (viewGroup.indexOfChild(inflate) != -1) {
                                 viewGroup.removeView(inflate);
                             }
