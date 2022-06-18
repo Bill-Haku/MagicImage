@@ -64,14 +64,15 @@ public class ChangeColorActivity extends AppCompatActivity implements SeekBar.On
                     mChangeColorIv.buildDrawingCache(true);
                     mChangeColorIv.buildDrawingCache();
                     Bitmap saveBitmap = mChangeColorIv.getDrawingCache();
-                    File temp = new File("/sdcard/DCIM/image");
+                    String path = Environment.getExternalStorageDirectory().getPath() + "/DCIM/magicimage";
+                    File temp = new File(path);
                     if (!temp.exists()) {
                         temp.mkdirs();
                     }
                     Random random = new Random();
                     int randNum = random.nextInt(99999999);
                     String randStr = String.valueOf(randNum);
-                    String fileName = Environment.getExternalStorageDirectory().getPath() +  "/DCIM/magicimage/" +  randStr + ".jpg";
+                    String fileName = path + randStr + ".jpg";
                     File file = new File(fileName);
                     try {
                         BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
