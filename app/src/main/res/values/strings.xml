@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ImageCompress</string>
+    <string name="app_name">Magic Image</string>
     <string name="preview">preview_image</string>
     <string name="camera">相机</string>
     <string name="album">相册</string>
