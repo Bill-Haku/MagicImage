@@ -14,7 +14,7 @@ import com.imagecompress.R;
 
 public class ExitDialog extends AlertDialog {
 
-    private CheckBox mDeleteCheck;
+//    private CheckBox mDeleteCheck;
     private TextView mCancelView;
     private TextView mConfirmView;
 
@@ -53,14 +53,14 @@ public class ExitDialog extends AlertDialog {
             @Override
             public void onClick(View view) {
                 if (onExitDialogClickListener != null){
-                    onExitDialogClickListener.onConfirmListener(mDeleteCheck.isChecked());
+                    onExitDialogClickListener.onConfirmListener(false);
                 }
             }
         });
     }
 
     private void initView() {
-        mDeleteCheck = findViewById(R.id.delete_cb);
+//        mDeleteCheck = findViewById(R.id.delete_cb);
         mCancelView = findViewById(R.id.cancel_tv);
         mConfirmView = findViewById(R.id.confirm_tv);
     }
